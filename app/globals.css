@@ -1,0 +1,131 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root,
+[data-theme="dark"] {
+  color-scheme: dark;
+  --font-vt323: "VT323", monospace;
+  --font-jetbrains: "JetBrains Mono", ui-monospace, monospace;
+
+  --bg: #000;
+  --fg: #fff;
+
+  --border-strong: rgba(255, 255, 255, 0.8);
+  --border-med: rgba(255, 255, 255, 0.6);
+  --border-soft: rgba(255, 255, 255, 0.2);
+  --border-faint: rgba(255, 255, 255, 0.08);
+
+  --overlay-tint: rgba(0, 0, 0, 0.7);
+
+  --glow-strong: 0 0 12px rgba(255, 255, 255, 0.45);
+  --glow-soft: 0 0 6px rgba(255, 255, 255, 0.18);
+  --glow-body: 0 0 6px rgba(255, 255, 255, 0.25);
+
+  --audio-filter: invert(1) hue-rotate(180deg) grayscale(1);
+}
+
+[data-theme="light"] {
+  color-scheme: light;
+
+  --bg: #fff;
+  --fg: #000;
+
+  --border-strong: rgba(0, 0, 0, 0.85);
+  --border-med: rgba(0, 0, 0, 0.55);
+  --border-soft: rgba(0, 0, 0, 0.22);
+  --border-faint: rgba(0, 0, 0, 0.08);
+
+  --overlay-tint: rgba(255, 255, 255, 0.7);
+
+  /* Light-mode shadow: a soft, dark drop shadow for contrast against white. */
+  --glow-strong: 1px 1px 0 rgba(0, 0, 0, 0.35), 0 2px 6px rgba(0, 0, 0, 0.18);
+  --glow-soft: 0 1px 0 rgba(0, 0, 0, 0.18);
+  --glow-body: 0 1px 0 rgba(0, 0, 0, 0.16);
+
+  --audio-filter: none;
+}
+
+html,
+body {
+  background: var(--bg);
+  color: var(--fg);
+  min-height: 100%;
+}
+
+body {
+  font-family: var(--font-jetbrains), ui-monospace, monospace;
+  -webkit-font-smoothing: antialiased;
+  text-shadow: var(--glow-body);
+  transition:
+    background 200ms ease-out,
+    color 200ms ease-out;
+}
+
+.glow-strong {
+  text-shadow: var(--glow-strong);
+}
+.glow-soft {
+  text-shadow: var(--glow-soft);
+}
+
+/* Markdown block styling — keep terminal feel */
+.prose-terminal h2 {
+  font-size: 20px;
+  margin-top: 1.4em;
+  margin-bottom: 0.4em;
+  letter-spacing: 0.02em;
+}
+.prose-terminal h3 {
+  font-size: 16px;
+  margin-top: 1.2em;
+  margin-bottom: 0.3em;
+}
+.prose-terminal p {
+  margin: 0.8em 0;
+  line-height: 1.7;
+}
+.prose-terminal a {
+  color: var(--fg);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.prose-terminal ul,
+.prose-terminal ol {
+  margin: 0.8em 0;
+  padding-left: 1.4em;
+}
+.prose-terminal li {
+  margin: 0.3em 0;
+}
+.prose-terminal code {
+  background: var(--border-faint);
+  padding: 1px 6px;
+  border-radius: 2px;
+}
+
+/* Native audio control — keep minimal */
+audio {
+  width: 100%;
+  margin-top: 16px;
+  filter: var(--audio-filter);
+  border: 1px solid var(--border-soft);
+  border-radius: 0;
+}
+
+/* Caret blink */
+@keyframes caret-blink {
+  0%,
+  49% {
+    opacity: 1;
+  }
+  50%,
+  100% {
+    opacity: 0;
+  }
+}
+.caret::after {
+  content: "_";
+  margin-left: 2px;
+  animation: caret-blink 1s steps(1) infinite;
+}
