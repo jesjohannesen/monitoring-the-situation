@@ -1,5 +1,8 @@
 # briefing
 
+**Live:** https://monitoring-the-situation-one.vercel.app
+**Repo:** https://github.com/jesjohannesen/monitoring-the-situation
+
 A hyperminimalist daily news briefing webapp. Black-and-white only, terminal
 feel. The app does **not** call the Anthropic API. A separate upstream job
 (e.g. a Claude Cowork scheduled task running on your own machine) generates the
