@@ -10,6 +10,7 @@ import {
 } from "react";
 import type { LinkPreview } from "@/lib/supabase";
 import { SynthesisBlock } from "./SynthesisBlock";
+import { Reflections } from "./Reflections";
 
 export type Annotation = {
   id: string;
@@ -291,6 +292,9 @@ export function AnnotatedSynthesis({
         }}
         onDelete={deleteAnnotation}
       />
+
+      {/* Reflection — opens a full-size editor with notes alongside */}
+      <Reflections briefingDate={briefingDate} annotations={annotations} />
     </div>
   );
 }

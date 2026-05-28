@@ -113,6 +113,51 @@ audio {
   border-radius: 0;
 }
 
+/* Reflections — trigger + toolbar + editor */
+.reflections-trigger:hover {
+  opacity: 1 !important;
+}
+.rt-btn:hover {
+  border-color: var(--fg);
+  text-shadow: var(--glow-strong);
+}
+.reflection-editor:empty::before {
+  content: attr(data-placeholder);
+  opacity: 0.4;
+  pointer-events: none;
+}
+.reflection-editor ul,
+.reflection-editor ol {
+  padding-left: 1.6em;
+  margin: 0.5em 0;
+}
+.reflection-editor ul {
+  list-style-type: disc;
+}
+.reflection-editor ol {
+  list-style-type: decimal;
+}
+.reflection-editor li {
+  margin: 0.25em 0;
+  display: list-item;
+}
+.reflection-editor li::marker {
+  color: var(--fg);
+  opacity: 0.85;
+}
+.reflection-editor strong,
+.reflection-editor b {
+  font-weight: 700;
+}
+.reflection-editor em,
+.reflection-editor i {
+  font-style: italic;
+}
+.reflection-editor a {
+  color: inherit;
+  text-decoration: underline;
+}
+
 /* Annotation marks — clickable inline highlights */
 mark.annotation-mark {
   background: var(--border-soft);
