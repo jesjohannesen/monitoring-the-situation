@@ -4,8 +4,8 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { BootScreen } from "@/components/BootScreen";
 import { BriefingHeading } from "@/components/BriefingHeading";
-import { SynthesisBlock } from "@/components/SynthesisBlock";
-import { AudioButton } from "@/components/AudioButton";
+import { AnnotatedSynthesis } from "@/components/AnnotatedSynthesis";
+import { AudioSummaries } from "@/components/AudioSummaries";
 
 type LinkPreview = {
   title?: string;
@@ -18,6 +18,8 @@ type Briefing = {
   briefing_date: string;
   themes_heading: string;
   synthesis_md: string;
+  english_script: string;
+  norwegian_script: string;
   link_previews?: Record<string, LinkPreview>;
 };
 
@@ -79,22 +81,16 @@ export default function Page() {
               themesHeading={briefing.themes_heading}
               briefingDate={briefing.briefing_date}
             />
-            <SynthesisBlock
+            <AudioSummaries
+              briefingDate={briefing.briefing_date}
+              englishScript={briefing.english_script}
+              norwegianScript={briefing.norwegian_script}
+            />
+            <AnnotatedSynthesis
               markdown={briefing.synthesis_md}
+              briefingDate={briefing.briefing_date}
               linkPreviews={briefing.link_previews}
             />
-            <div className="mt-12 grid grid-cols-2 gap-4">
-              <AudioButton
-                label="generate english audio"
-                endpoint="/api/audio/en"
-                briefingDate={briefing.briefing_date}
-              />
-              <AudioButton
-                label="generere lyd på norsk"
-                endpoint="/api/audio/no"
-                briefingDate={briefing.briefing_date}
-              />
-            </div>
           </>
         ) : (
           <div

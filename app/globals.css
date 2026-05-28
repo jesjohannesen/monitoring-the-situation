@@ -113,6 +113,23 @@ audio {
   border-radius: 0;
 }
 
+/* Annotation marks — clickable inline highlights */
+mark.annotation-mark {
+  background: var(--border-soft);
+  color: inherit;
+  border-bottom: 1px solid var(--border-med);
+  padding: 0 1px;
+  cursor: pointer;
+  border-radius: 0;
+  transition:
+    background 120ms ease-out,
+    border-color 120ms ease-out;
+}
+mark.annotation-mark:hover {
+  background: var(--border-med);
+  border-bottom-color: var(--fg);
+}
+
 /* Caret blink */
 @keyframes caret-blink {
   0%,
