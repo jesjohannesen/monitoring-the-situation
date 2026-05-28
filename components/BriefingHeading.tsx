@@ -29,29 +29,32 @@ function formatDateLine(iso: string): string {
     "november",
     "december",
   ];
-  return `${days[dt.getUTCDay()]} · ${months[dt.getUTCMonth()]} ${dt.getUTCDate()} · ${dt.getUTCFullYear()}`;
+  return `${days[dt.getUTCDay()]} / ${months[dt.getUTCMonth()]} ${dt.getUTCDate()} / ${dt.getUTCFullYear()}`;
 }
 
 export function BriefingHeading({ themesHeading, briefingDate }: Props) {
   return (
-    <div className="mb-12">
+    <div className="mb-4">
       <h1
         className="glow-strong"
         style={{
           fontFamily: "var(--font-vt323), monospace",
-          fontSize: "64px",
-          lineHeight: 1.05,
+          fontSize: "44px",
+          lineHeight: 1.1,
           letterSpacing: "0.01em",
         }}
       >
         {themesHeading}
       </h1>
       <div
+        id="briefing-date-line"
         className="mt-3 lowercase"
         style={{
-          fontFamily: "var(--font-jetbrains), monospace",
-          fontSize: "13px",
-          opacity: 0.5,
+          fontFamily: "var(--font-vt323), monospace",
+          fontSize: "18px",
+          letterSpacing: "0.04em",
+          opacity: 0.6,
+          textShadow: "var(--glow-soft)",
         }}
       >
         {formatDateLine(briefingDate)}

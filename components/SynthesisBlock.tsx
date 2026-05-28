@@ -1,5 +1,6 @@
 "use client";
 
+import { memo } from "react";
 import ReactMarkdown, { Components } from "react-markdown";
 import type { LinkPreview } from "@/lib/supabase";
 import { LinkWithPreview } from "./LinkWithPreview";
@@ -9,7 +10,7 @@ type Props = {
   linkPreviews?: Record<string, LinkPreview>;
 };
 
-export function SynthesisBlock({ markdown, linkPreviews }: Props) {
+function SynthesisBlockImpl({ markdown, linkPreviews }: Props) {
   const components: Components = {
     a: ({ href, children, ...rest }) => (
       <LinkWithPreview
@@ -39,3 +40,9 @@ export function SynthesisBlock({ markdown, linkPreviews }: Props) {
     </div>
   );
 }
+
+// Memoized so the markdown only re-renders when its actual props change —
+// closing a margin card doesn't reconcile (and thus doesn't wipe) the inline
+// <mark> nodes the annotation system inserts.
+export const SynthesisBlock = memo(SynthesisBlockImpl);
+

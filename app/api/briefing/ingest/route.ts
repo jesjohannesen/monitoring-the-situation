@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 import { getSupabase } from "@/lib/supabase";
+import { deleteCachedAudio } from "@/lib/audio-cache";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -61,6 +62,10 @@ export async function POST(req: NextRequest) {
   if (error) {
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
+
+  // Invalidate any cached audio for this date so a re-ingested briefing gets
+  // freshly synthesized audio on the next request.
+  await deleteCachedAudio(parsed.data.briefing_date);
 
   return NextResponse.json({ ok: true, briefing: data });
 }
