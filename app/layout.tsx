@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { ThemeToggle } from "@/components/ThemeToggle";
+import { NavMenu } from "@/components/NavMenu";
 
 export const metadata: Metadata = {
   title: "briefing",
@@ -36,12 +37,13 @@ export default function RootLayout({
           crossOrigin=""
         />
         <link
-          href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=VT323&display=swap"
+          href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,500;0,700;1,400;1,700&family=VT323&display=swap"
           rel="stylesheet"
         />
         <script dangerouslySetInnerHTML={{ __html: noFlashScript }} />
       </head>
       <body>
+        <NavMenu />
         <ThemeToggle />
         {children}
       </body>
