@@ -40,5 +40,11 @@ export type BriefingRow = {
   norwegian_script: string;
   sources: Array<{ title: string; url: string }>;
   link_previews: Record<string, LinkPreview>;
+  tags: string[];
   ingested_at: string;
 };
+
+export type BriefingSummary = Pick<
+  BriefingRow,
+  "id" | "briefing_date" | "themes_heading" | "tags" | "ingested_at"
+>;
