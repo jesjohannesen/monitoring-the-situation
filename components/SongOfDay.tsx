@@ -145,7 +145,7 @@ export function SongOfDay({ song }: Props) {
             border: "none",
             color: "var(--fg)",
             fontFamily: "var(--font-display), monospace",
-            fontSize: "16px",
+            fontSize: "var(--toggle-size)",
             opacity: 0.6,
             textShadow: "var(--glow-soft)",
             letterSpacing: "0.03em",
