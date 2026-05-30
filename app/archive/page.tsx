@@ -65,7 +65,7 @@ export default function ArchivePage() {
             marginBottom: "20px",
           }}
         >
-          archive
+          previous summaries
         </h1>
 
         {loadErr && (
@@ -287,6 +287,7 @@ function EntryRow({
       >
         <Link
           href={`/entry/${briefing.briefing_date}`}
+          className="archive-entry-headline"
           style={{
             fontFamily: "var(--font-display), monospace",
             fontSize: "22px",

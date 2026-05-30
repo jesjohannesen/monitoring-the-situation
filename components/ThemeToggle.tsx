@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { pauseSpotify } from "./SpotifyPlayer";
 
 type Style = "hacker" | "cognition" | "paul-allen";
 type Mode = "dark" | "light";
@@ -266,6 +267,9 @@ export function ThemeToggle() {
       if (mode !== "light") {
         pickMode("light");
       }
+      // Hush the song-of-the-day so the sting plays cleanly. No-op if
+      // Spotify isn't connected or nothing is playing.
+      pauseSpotify();
       playPaulAllenSting();
     }
   }

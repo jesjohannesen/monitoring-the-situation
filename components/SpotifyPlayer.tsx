@@ -155,6 +155,17 @@ function loadSDKAndConnect() {
   }
 }
 
+// Fire-and-forget pause helper for callers outside the React render tree
+// (e.g. ThemeToggle wants to hush the music when entering paul-allen so
+// the sting plays unobstructed). Safe to call when nothing is playing.
+export function pauseSpotify(): void {
+  try {
+    void modulePlayer?.pause();
+  } catch {
+    /* ignore */
+  }
+}
+
 // Called by the player to externally reset (e.g. on logout).
 export function resetSpotifyPlayer() {
   modulePlayer?.disconnect();

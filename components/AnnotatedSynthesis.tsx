@@ -11,6 +11,7 @@ import {
 import type { LinkPreview } from "@/lib/supabase";
 import { SynthesisBlock } from "./SynthesisBlock";
 import { Reflections } from "./Reflections";
+import { useDataStyle, type DataStyle } from "@/lib/useDataStyle";
 
 export type Annotation = {
   id: string;
@@ -606,6 +607,7 @@ function NoteCard({
   const [saving, setSaving] = useState(false);
   const [err, setErr] = useState<string | null>(null);
   const taRef = useRef<HTMLTextAreaElement | null>(null);
+  const dataStyle = useDataStyle();
 
   useEffect(() => {
     if (mode === "edit") taRef.current?.focus();
@@ -795,17 +797,20 @@ function NoteCard({
             onClick={handleSave}
             disabled={saving || !value.trim()}
             className="ann-btn"
-            style={annBtnStyle({ disabled: saving || !value.trim() })}
+            style={annBtnStyle({
+              disabled: saving || !value.trim(),
+              style: dataStyle,
+            })}
           >
-            [ save ]
+            {bracketLabel("save", dataStyle)}
           </button>
           <button
             type="button"
             onClick={onCancel}
             className="ann-btn"
-            style={annBtnStyle({})}
+            style={annBtnStyle({ style: dataStyle })}
           >
-            [ cancel ]
+            {bracketLabel("cancel", dataStyle)}
           </button>
         </div>
         {onDelete && (
@@ -813,9 +818,9 @@ function NoteCard({
             type="button"
             onClick={handleDelete}
             className="ann-btn"
-            style={annBtnStyle({ subtle: true })}
+            style={annBtnStyle({ subtle: true, style: dataStyle })}
           >
-            [ delete ]
+            {bracketLabel("delete", dataStyle)}
           </button>
         )}
       </div>
@@ -835,22 +840,33 @@ function NoteCard({
 }
 
 
+// Hacker keeps the terminal `[ TEXT ]` look. Cognition + paul-allen drop the
+// brackets — they read as visual noise against Inter / Copperplate.
+function bracketLabel(text: string, style: DataStyle): string {
+  return style === "hacker" ? `[ ${text} ]` : text;
+}
+
 function annBtnStyle({
   disabled,
   subtle,
+  style,
 }: {
   disabled?: boolean;
   subtle?: boolean;
+  style: DataStyle;
 }): CSSProperties {
+  const isTerminal = style === "hacker";
   return {
     background: "transparent",
     border: `1px solid ${subtle ? "var(--border-soft)" : "var(--border-strong)"}`,
     color: "var(--fg)",
     fontFamily: "var(--font-ui), monospace",
-    fontSize: "10px",
-    letterSpacing: "0.08em",
+    // Slightly smaller / tighter for editorial themes; the terminal theme
+    // benefits from the wider tracking and the bracketed label.
+    fontSize: isTerminal ? "10px" : "9px",
+    letterSpacing: isTerminal ? "0.08em" : "0.05em",
     textTransform: "uppercase",
-    padding: "5px 8px",
+    padding: isTerminal ? "5px 8px" : "4px 9px",
     cursor: disabled ? "not-allowed" : "pointer",
     opacity: disabled ? 0.4 : 1,
     transition: "all 120ms ease-out",
