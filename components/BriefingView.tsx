@@ -4,6 +4,8 @@ import { motion } from "framer-motion";
 import { BriefingHeading } from "./BriefingHeading";
 import { AnnotatedSynthesis } from "./AnnotatedSynthesis";
 import { AudioSummaries } from "./AudioSummaries";
+import { SongOfDay } from "./SongOfDay";
+import type { SongSuggestion } from "@/lib/supabase";
 
 type LinkPreview = {
   title?: string;
@@ -20,6 +22,7 @@ export type Briefing = {
   norwegian_script: string;
   link_previews?: Record<string, LinkPreview>;
   tags?: string[];
+  song_suggestion?: SongSuggestion | null;
 };
 
 type Props = {
@@ -43,6 +46,7 @@ export function BriefingView({ briefing, loadErr }: Props) {
             themesHeading={briefing.themes_heading}
             briefingDate={briefing.briefing_date}
           />
+          <SongOfDay song={briefing.song_suggestion} />
           <AudioSummaries
             briefingDate={briefing.briefing_date}
             englishScript={briefing.english_script}
@@ -58,7 +62,7 @@ export function BriefingView({ briefing, loadErr }: Props) {
         <div
           className="caret"
           style={{
-            fontFamily: "var(--font-jetbrains), monospace",
+            fontFamily: "var(--font-ui), monospace",
             fontSize: "13px",
             opacity: 0.6,
           }}

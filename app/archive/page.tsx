@@ -58,10 +58,10 @@ export default function ArchivePage() {
         <h1
           className="glow-strong"
           style={{
-            fontFamily: "var(--font-vt323), monospace",
-            fontSize: "44px",
-            lineHeight: 1.1,
-            letterSpacing: "0.01em",
+            fontFamily: "var(--font-display), monospace",
+            fontSize: "var(--heading-size)",
+            lineHeight: "var(--heading-line-height)",
+            letterSpacing: "var(--display-letter-spacing)",
             marginBottom: "20px",
           }}
         >
@@ -71,7 +71,7 @@ export default function ArchivePage() {
         {loadErr && (
           <div
             style={{
-              fontFamily: "var(--font-jetbrains), monospace",
+              fontFamily: "var(--font-ui), monospace",
               fontSize: "13px",
               opacity: 0.6,
             }}
@@ -92,7 +92,7 @@ export default function ArchivePage() {
           >
             <span
               style={{
-                fontFamily: "var(--font-vt323), monospace",
+                fontFamily: "var(--font-display), monospace",
                 fontSize: "16px",
                 opacity: 0.6,
                 marginRight: "4px",
@@ -120,7 +120,7 @@ export default function ArchivePage() {
           <div
             className="caret"
             style={{
-              fontFamily: "var(--font-jetbrains), monospace",
+              fontFamily: "var(--font-ui), monospace",
               fontSize: "13px",
               opacity: 0.6,
             }}
@@ -132,7 +132,7 @@ export default function ArchivePage() {
         {briefings && filtered.length === 0 && (
           <div
             style={{
-              fontFamily: "var(--font-jetbrains), monospace",
+              fontFamily: "var(--font-ui), monospace",
               fontSize: "13px",
               opacity: 0.55,
             }}
@@ -183,7 +183,7 @@ function FilterPill({
         background: active ? "var(--border-soft)" : "transparent",
         border: `1px solid ${active ? "var(--border-med)" : "var(--border-soft)"}`,
         color: "var(--fg)",
-        fontFamily: "var(--font-jetbrains), monospace",
+        fontFamily: "var(--font-ui), monospace",
         fontSize: "11px",
         letterSpacing: "0.06em",
         textTransform: "lowercase",
@@ -288,7 +288,7 @@ function EntryRow({
         <Link
           href={`/entry/${briefing.briefing_date}`}
           style={{
-            fontFamily: "var(--font-vt323), monospace",
+            fontFamily: "var(--font-display), monospace",
             fontSize: "22px",
             color: "var(--fg)",
             textShadow: "var(--glow-strong)",
@@ -302,7 +302,7 @@ function EntryRow({
         </Link>
         <span
           style={{
-            fontFamily: "var(--font-jetbrains), monospace",
+            fontFamily: "var(--font-ui), monospace",
             fontSize: "11px",
             opacity: 0.55,
             whiteSpace: "nowrap",
@@ -326,7 +326,7 @@ function EntryRow({
             style={{
               border: "1px solid var(--border-soft)",
               padding: "2px 7px 2px 8px",
-              fontFamily: "var(--font-jetbrains), monospace",
+              fontFamily: "var(--font-ui), monospace",
               fontSize: "11px",
               letterSpacing: "0.04em",
               lineHeight: 1.5,
@@ -344,7 +344,7 @@ function EntryRow({
                 background: "transparent",
                 border: "none",
                 color: "var(--fg)",
-                fontFamily: "var(--font-jetbrains), monospace",
+                fontFamily: "var(--font-ui), monospace",
                 fontSize: "10px",
                 opacity: 0.5,
                 padding: 0,
@@ -378,7 +378,7 @@ function EntryRow({
               background: "transparent",
               border: "1px solid var(--border-med)",
               color: "var(--fg)",
-              fontFamily: "var(--font-jetbrains), monospace",
+              fontFamily: "var(--font-ui), monospace",
               fontSize: "11px",
               padding: "2px 7px",
               outline: "none",
@@ -393,7 +393,7 @@ function EntryRow({
               background: "transparent",
               border: "1px dashed var(--border-soft)",
               color: "var(--fg)",
-              fontFamily: "var(--font-jetbrains), monospace",
+              fontFamily: "var(--font-ui), monospace",
               fontSize: "11px",
               letterSpacing: "0.04em",
               padding: "2px 7px",
@@ -409,7 +409,7 @@ function EntryRow({
             style={{
               fontSize: "10px",
               opacity: 0.55,
-              fontFamily: "var(--font-jetbrains), monospace",
+              fontFamily: "var(--font-ui), monospace",
             }}
           >
             {savingErr}

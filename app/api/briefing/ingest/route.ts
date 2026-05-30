@@ -12,6 +12,16 @@ const LinkPreviewSchema = z.object({
   host: z.string().optional(),
 });
 
+const SongSuggestionSchema = z
+  .object({
+    title: z.string().min(1).max(200),
+    artist: z.string().min(1).max(200),
+    why: z.string().max(1000).default(""),
+    spotify_uri: z.string().optional(),
+    spotify_external_url: z.string().url().optional(),
+  })
+  .nullable();
+
 const PayloadSchema = z.object({
   briefing_date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
   themes_heading: z.string().min(1),
@@ -22,6 +32,7 @@ const PayloadSchema = z.object({
     .array(z.object({ title: z.string(), url: z.string().url() }))
     .default([]),
   link_previews: z.record(z.string().url(), LinkPreviewSchema).default({}),
+  song_suggestion: SongSuggestionSchema.optional().default(null),
 });
 
 export async function POST(req: NextRequest) {

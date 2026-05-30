@@ -115,7 +115,7 @@ export function AudioButton({
           border: "1px solid var(--border-strong)",
           background: "transparent",
           color: "var(--fg)",
-          fontFamily: "var(--font-jetbrains), monospace",
+          fontFamily: "var(--font-ui), monospace",
           fontSize: "13px",
           letterSpacing: "0.1em",
           padding: "16px 24px",
@@ -270,7 +270,7 @@ function ScriptBody({
         style={{
           paddingBottom: "12px",
           borderBottom: "1px solid var(--border-soft)",
-          fontFamily: "var(--font-jetbrains), monospace",
+          fontFamily: "var(--font-ui), monospace",
           fontSize: "13px",
         }}
       >
@@ -283,7 +283,7 @@ function ScriptBody({
               border: "1px solid var(--border-strong)",
               background: "transparent",
               color: "var(--fg)",
-              fontFamily: "var(--font-jetbrains), monospace",
+              fontFamily: "var(--font-ui), monospace",
               fontSize: "12px",
               letterSpacing: "0.1em",
               textTransform: "uppercase",
@@ -337,7 +337,7 @@ function ScriptBody({
           <div
             style={{
               marginTop: "8px",
-              fontFamily: "var(--font-jetbrains), monospace",
+              fontFamily: "var(--font-ui), monospace",
               fontSize: "12px",
               opacity: 0.65,
               textShadow: "var(--glow-soft)",
@@ -504,7 +504,7 @@ function ReadAlongScript({
     <div
       ref={rootRef}
       style={{
-        fontFamily: "var(--font-jetbrains), monospace",
+        fontFamily: "var(--font-body), monospace",
         fontSize: "15px",
         lineHeight: 1.7,
         whiteSpace: "pre-wrap",

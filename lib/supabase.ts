@@ -31,6 +31,15 @@ export type LinkPreview = {
   host?: string;
 };
 
+export type SongSuggestion = {
+  title: string;
+  artist: string;
+  why: string;
+  // Filled in lazily by the client after resolving through Spotify.
+  spotify_uri?: string;
+  spotify_external_url?: string;
+};
+
 export type BriefingRow = {
   id: string;
   briefing_date: string;
@@ -41,6 +50,7 @@ export type BriefingRow = {
   sources: Array<{ title: string; url: string }>;
   link_previews: Record<string, LinkPreview>;
   tags: string[];
+  song_suggestion: SongSuggestion | null;
   ingested_at: string;
 };
 

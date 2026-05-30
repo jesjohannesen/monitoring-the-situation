@@ -8,6 +8,7 @@ import {
   useRef,
   useState,
 } from "react";
+import { createPortal } from "react-dom";
 import type { LinkPreview } from "@/lib/supabase";
 
 type Props = AnchorHTMLAttributes<HTMLAnchorElement> & {
@@ -39,6 +40,14 @@ async function fetchPreview(url: string): Promise<LinkPreview> {
   return p;
 }
 
+type Anchor = {
+  // Viewport-anchored coords for position: fixed.
+  top: number;
+  bottom: number;
+  left: number;
+  placement: "above" | "below";
+};
+
 export function LinkWithPreview({
   href,
   children,
@@ -47,13 +56,19 @@ export function LinkWithPreview({
 }: Props) {
   const [state, setState] = useState<CardState>({ kind: "idle" });
   const [open, setOpen] = useState(false);
-  const [placement, setPlacement] = useState<"above" | "below">("below");
+  const [anchor, setAnchor] = useState<Anchor | null>(null);
+  const [mounted, setMounted] = useState(false);
   const linkRef = useRef<HTMLAnchorElement | null>(null);
-  const cardRef = useRef<HTMLSpanElement | null>(null);
+  const cardRef = useRef<HTMLDivElement | null>(null);
   const openTimer = useRef<number | null>(null);
   const closeTimer = useRef<number | null>(null);
 
   const url = typeof href === "string" ? href : "";
+
+  // createPortal needs `document` — guard for SSR.
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   // Seed the cache from the briefing payload (if the ingest included it).
   useEffect(() => {
@@ -71,19 +86,28 @@ export function LinkWithPreview({
     closeTimer.current = null;
   }
 
-  function decidePlacement() {
+  function computeAnchor(): Anchor | null {
     const el = linkRef.current;
-    if (!el) return;
+    if (!el) return null;
     const rect = el.getBoundingClientRect();
     const spaceBelow = window.innerHeight - rect.bottom;
-    setPlacement(spaceBelow < 320 && rect.top > 320 ? "above" : "below");
+    const placement: "above" | "below" =
+      spaceBelow < 320 && rect.top > 320 ? "above" : "below";
+    return {
+      top: rect.top,
+      bottom: rect.bottom,
+      left: rect.left,
+      placement,
+    };
   }
 
   function handleEnter() {
     if (!url) return;
     clearTimers();
     openTimer.current = window.setTimeout(() => {
-      decidePlacement();
+      const a = computeAnchor();
+      if (!a) return;
+      setAnchor(a);
       setOpen(true);
       if (state.kind === "idle") {
         setState({ kind: "loading" });
@@ -112,32 +136,65 @@ export function LinkWithPreview({
     handleLeave();
   }
 
-  // Card uses <span> with display:block so it remains a valid descendant of
-  // <p> (react-markdown wraps paragraphs in <p>, which disallows block-level
-  // children).
-  const cardStyle: CSSProperties = {
-    display: "block",
-    position: "absolute",
-    zIndex: 70,
-    [placement === "below" ? "top" : "bottom"]: "calc(100% + 6px)",
-    left: 0,
-    width: "min(420px, 80vw)",
-    maxHeight: "280px",
-    overflowY: "auto",
-    background: "var(--bg)",
-    color: "var(--fg)",
-    border: "1px solid var(--border-soft)",
-    padding: "14px 16px",
-    fontFamily: "var(--font-jetbrains), monospace",
-    fontSize: "13px",
-    lineHeight: 1.55,
-    textShadow: "var(--glow-soft)",
-    boxShadow: "0 6px 18px rgba(0,0,0,0.35)",
-  };
+  // While the card is open, follow the link on scroll/resize so it stays
+  // anchored to the underlying text.
+  useEffect(() => {
+    if (!open) return;
+    function update() {
+      const a = computeAnchor();
+      if (a) setAnchor(a);
+    }
+    window.addEventListener("scroll", update, { passive: true });
+    window.addEventListener("resize", update);
+    return () => {
+      window.removeEventListener("scroll", update);
+      window.removeEventListener("resize", update);
+    };
+  }, [open]);
+
+  // Build position: fixed style from the anchor.
+  function cardPositionStyle(a: Anchor): CSSProperties {
+    const cardWidth = Math.min(420, window.innerWidth * 0.8);
+    // Keep the card on-screen horizontally.
+    let left = a.left;
+    const margin = 12;
+    if (left + cardWidth > window.innerWidth - margin) {
+      left = window.innerWidth - margin - cardWidth;
+    }
+    if (left < margin) left = margin;
+    if (a.placement === "below") {
+      return { top: a.bottom + 6, left };
+    }
+    return {
+      top: a.top - 6,
+      left,
+      transform: "translateY(-100%)",
+    };
+  }
+
+  const cardStyle: CSSProperties = anchor
+    ? {
+        ...cardPositionStyle(anchor),
+        position: "fixed",
+        zIndex: 95,
+        width: "min(420px, 80vw)",
+        maxHeight: "280px",
+        overflowY: "auto",
+        background: "var(--bg)",
+        color: "var(--fg)",
+        border: "1px solid var(--border-soft)",
+        padding: "14px 16px",
+        fontFamily: "var(--font-body), monospace",
+        fontSize: "13px",
+        lineHeight: 1.55,
+        textShadow: "var(--glow-soft)",
+        boxShadow: "0 6px 18px rgba(0,0,0,0.4)",
+      }
+    : {};
 
   return (
     <span
-      style={{ position: "relative", display: "inline" }}
+      style={{ display: "inline" }}
       onMouseEnter={handleEnter}
       onMouseLeave={handleLeave}
     >
@@ -150,16 +207,18 @@ export function LinkWithPreview({
       >
         {children}
       </a>
-      {open && url && (
-        <span
-          ref={cardRef}
-          style={cardStyle}
-          onMouseEnter={handleCardEnter}
-          onMouseLeave={handleCardLeave}
-        >
-          <PreviewBody state={state} url={url} />
-        </span>
-      )}
+      {mounted && open && url && anchor &&
+        createPortal(
+          <div
+            ref={cardRef}
+            style={cardStyle}
+            onMouseEnter={handleCardEnter}
+            onMouseLeave={handleCardLeave}
+          >
+            <PreviewBody state={state} url={url} />
+          </div>,
+          document.body,
+        )}
     </span>
   );
 }

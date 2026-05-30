@@ -2,14 +2,60 @@
 @tailwind components;
 @tailwind utilities;
 
-:root,
-[data-theme="dark"] {
-  color-scheme: dark;
+/* ─── Theme system: STYLE × MODE ─────────────────────────────────────────
+ * data-style → controls font set + how typography feels (terminal vs
+ *              editorial).
+ * data-mode  → controls the color palette (dark vs light).
+ * Both axes are independent. Default to hacker + dark. */
+
+:root {
+  /* Aliases kept for any legacy code still referencing the old var names. */
   --font-vt323: "VT323", monospace;
   --font-jetbrains: "JetBrains Mono", ui-monospace, monospace;
+}
 
+/* ─── Style: hacker (default) — terminal/pixel/monospace ──────────────── */
+:root,
+[data-style="hacker"] {
+  --font-display: "VT323", monospace;
+  --font-body: "JetBrains Mono", ui-monospace, monospace;
+  --font-ui: "JetBrains Mono", ui-monospace, monospace;
+  --display-letter-spacing: 0.01em;
+  --display-weight: 400;
+  --prose-font-size: 15px;
+  --prose-line-height: 1.7;
+  --heading-size: 44px;
+  --heading-line-height: 1.1;
+  --date-size: 18px;
+  --toggle-size: 20px;
+}
+
+/* ─── Style: cognition — editorial Inter + Newsreader serif ───────────── */
+[data-style="cognition"] {
+  --font-display: "Inter", system-ui, sans-serif;
+  --font-body: "Newsreader", Georgia, serif;
+  --font-ui: "Inter", system-ui, sans-serif;
+  --display-letter-spacing: -0.02em;
+  --display-weight: 600;
+  --prose-font-size: 17px;
+  --prose-line-height: 1.65;
+  /* Inter at 44 reads heavier than VT323 at 44 because pixel fonts feel
+   * lighter per em; trim a few px and tighten leading. */
+  --heading-size: 38px;
+  --heading-line-height: 1.08;
+  --date-size: 15px;
+  --toggle-size: 17px;
+}
+
+/* ─── Mode: dark (default) — black bg, white fg, soft white glow ──────── */
+:root,
+[data-mode="dark"] {
+  color-scheme: dark;
   --bg: #000;
   --fg: #fff;
+  --accent: #fff;
+  --link-color: var(--fg);
+  --link-underline: var(--border-med);
 
   --border-strong: rgba(255, 255, 255, 0.8);
   --border-med: rgba(255, 255, 255, 0.6);
@@ -25,11 +71,14 @@
   --audio-filter: invert(1) hue-rotate(180deg) grayscale(1);
 }
 
-[data-theme="light"] {
+/* ─── Mode: light — white bg, black fg, drop-shadow for contrast ──────── */
+[data-mode="light"] {
   color-scheme: light;
-
   --bg: #fff;
   --fg: #000;
+  --accent: #000;
+  --link-color: var(--fg);
+  --link-underline: var(--border-med);
 
   --border-strong: rgba(0, 0, 0, 0.85);
   --border-med: rgba(0, 0, 0, 0.55);
@@ -38,11 +87,139 @@
 
   --overlay-tint: rgba(255, 255, 255, 0.7);
 
-  /* Light-mode shadow: a soft, dark drop shadow for contrast against white. */
   --glow-strong: 1px 1px 0 rgba(0, 0, 0, 0.35), 0 2px 6px rgba(0, 0, 0, 0.18);
   --glow-soft: 0 1px 0 rgba(0, 0, 0, 0.18);
   --glow-body: 0 1px 0 rgba(0, 0, 0, 0.16);
 
+  --audio-filter: none;
+}
+
+/* ─── Style: paul-allen — American Psycho business card ──────────────── */
+[data-style="paul-allen"] {
+  /* Copperplate is shipped with macOS; everything else falls back to
+   * Cinzel + Marcellus SC (loaded from Google Fonts) which capture the
+   * engraved-cap feel reasonably well. */
+  --font-display: "Copperplate", "Copperplate Gothic Light",
+    "Copperplate Gothic", "Cinzel", "Marcellus SC", "Times New Roman", serif;
+  --font-body: "Copperplate", "Copperplate Gothic Light", "Cinzel",
+    "Marcellus SC", "Times New Roman", serif;
+  --font-ui: "Copperplate", "Copperplate Gothic Light", "Cinzel",
+    "Marcellus SC", serif;
+  --display-letter-spacing: 0.08em; /* wide tracking is the Paul Allen tell */
+  --display-weight: 400;
+  --prose-font-size: 14px;
+  --prose-line-height: 1.85;
+  --heading-size: 30px;
+  --heading-line-height: 1.18;
+  --date-size: 13px;
+  --toggle-size: 13px;
+  /* Paul Allen's card — true subtle off-white, neutral and barely warm.
+   * Sampled to mimic the actual business-card stock: nearly desaturated,
+   * a touch of cream so it doesn't read as cold paper. */
+  --bg: #ece9df; /* off-white / bone */
+  --fg: #1a1916; /* near-black engraved ink, slightly neutral */
+  --accent: #1a1916;
+  --link-color: #28251e;
+  --link-underline: rgba(26, 25, 22, 0.45);
+
+  --border-strong: rgba(26, 25, 22, 0.55);
+  --border-med: rgba(26, 25, 22, 0.28);
+  --border-soft: rgba(26, 25, 22, 0.14);
+  --border-faint: rgba(26, 25, 22, 0.06);
+
+  --overlay-tint: rgba(236, 233, 223, 0.85);
+
+  --glow-strong: none;
+  --glow-soft: none;
+  --glow-body: none;
+
+  --audio-filter: none;
+
+  color-scheme: light;
+}
+
+[data-style="paul-allen"][data-mode="light"] body {
+  /* Subtle paper grain — fine SVG noise layered under the eggshell. */
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.11 0 0 0 0 0.10 0 0 0 0 0.08 0 0 0 0.05 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  background-blend-mode: multiply;
+  background-size: 220px 220px;
+}
+
+/* ─── Paul Allen · dark — engraved cream ink on a mahogany surface ────── */
+[data-style="paul-allen"][data-mode="dark"] {
+  color-scheme: dark;
+  --bg: #1b1612; /* dark mahogany */
+  --fg: #e9dfc6; /* warm cream ink */
+  --accent: #d4b574; /* dim brass */
+  --link-color: #d4b574;
+  --link-underline: rgba(212, 181, 116, 0.45);
+
+  --border-strong: rgba(233, 223, 198, 0.55);
+  --border-med: rgba(233, 223, 198, 0.28);
+  --border-soft: rgba(233, 223, 198, 0.14);
+  --border-faint: rgba(233, 223, 198, 0.06);
+
+  --overlay-tint: rgba(27, 22, 18, 0.85);
+}
+
+[data-style="paul-allen"][data-mode="dark"] body {
+  /* Same fine grain, recoloured to read as flecks of light cream on dark
+   * leather/wood rather than ink on paper. */
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.91 0 0 0 0 0.87 0 0 0 0 0.78 0 0 0 0.05 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  background-blend-mode: screen;
+  background-size: 220px 220px;
+}
+
+[data-style="paul-allen"] h1,
+[data-style="paul-allen"] h2,
+[data-style="paul-allen"] h3 {
+  font-weight: var(--display-weight);
+  letter-spacing: var(--display-letter-spacing);
+  text-transform: uppercase;
+  font-variant: small-caps;
+}
+[data-style="paul-allen"] .prose-terminal {
+  font-size: var(--prose-font-size);
+  line-height: var(--prose-line-height);
+  letter-spacing: 0.04em;
+}
+[data-style="paul-allen"] .prose-terminal p {
+  line-height: var(--prose-line-height);
+}
+
+/* ─── Style × Mode overrides ─────────────────────────────────────────────
+ * Cognition has signature palette tweaks that depend on the mode. The
+ * accent stays #2200ff; the bg shifts from cream to a warm dark. Glow is
+ * always off for cognition (it has no glow in either mode). */
+[data-style="cognition"] {
+  --glow-strong: none;
+  --glow-soft: none;
+  --glow-body: none;
+  --accent: #2200ff;
+  --link-color: var(--accent);
+  --link-underline: rgba(34, 0, 255, 0.45);
+}
+[data-style="cognition"][data-mode="light"] {
+  --bg: #f7f6f5; /* warm cream */
+  --fg: #000;
+  --border-strong: rgba(0, 0, 0, 0.55);
+  --border-med: rgba(0, 0, 0, 0.18);
+  --border-soft: rgba(0, 0, 0, 0.08);
+  --border-faint: rgba(0, 0, 0, 0.04);
+  --overlay-tint: rgba(247, 246, 245, 0.85);
+}
+[data-style="cognition"][data-mode="dark"] {
+  --bg: #0f0e0d; /* warm near-black */
+  --fg: #efece8; /* cream as text */
+  --border-strong: rgba(255, 255, 255, 0.45);
+  --border-med: rgba(255, 255, 255, 0.18);
+  --border-soft: rgba(255, 255, 255, 0.08);
+  --border-faint: rgba(255, 255, 255, 0.04);
+  --overlay-tint: rgba(15, 14, 13, 0.85);
+  /* Brighten the blue so it stays readable on dark. */
+  --accent: #7a85ff;
+  --link-color: var(--accent);
+  --link-underline: rgba(122, 133, 255, 0.5);
   --audio-filter: none;
 }
 
@@ -54,12 +231,36 @@ body {
 }
 
 body {
-  font-family: var(--font-jetbrains), ui-monospace, monospace;
+  font-family: var(--font-body), ui-monospace, monospace;
   -webkit-font-smoothing: antialiased;
   text-shadow: var(--glow-body);
   transition:
     background 200ms ease-out,
     color 200ms ease-out;
+}
+
+/* ─── Cognition-style typography tweaks ──────────────────────────────── */
+[data-style="cognition"] h1,
+[data-style="cognition"] h2,
+[data-style="cognition"] h3 {
+  letter-spacing: var(--display-letter-spacing);
+  font-weight: var(--display-weight);
+}
+[data-style="cognition"] a {
+  color: var(--link-color);
+  text-decoration-color: var(--link-underline);
+}
+[data-style="cognition"] .prose-terminal {
+  font-size: var(--prose-font-size);
+  line-height: var(--prose-line-height);
+}
+[data-style="cognition"] mark.annotation-mark {
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+  border-bottom-color: var(--accent);
+}
+[data-style="cognition"] mark.annotation-mark:hover {
+  background: color-mix(in srgb, var(--accent) 22%, transparent);
+  border-bottom-color: var(--accent);
 }
 
 .glow-strong {
@@ -84,6 +285,11 @@ body {
 .prose-terminal p {
   margin: 0.8em 0;
   line-height: 1.7;
+}
+/* The first markdown block inside the prose box doesn't need its own top
+ * margin — the box's padding already establishes the breathing room. */
+.prose-terminal > *:first-child {
+  margin-top: 0;
 }
 .prose-terminal a {
   color: var(--fg);
@@ -157,6 +363,26 @@ audio {
   color: inherit;
   text-decoration: underline;
 }
+.reflection-editor h1,
+.reflection-editor h2 {
+  font-family: var(--font-display), inherit;
+  letter-spacing: var(--display-letter-spacing, 0.02em);
+  font-weight: 700;
+  line-height: 1.2;
+  margin: 0.7em 0 0.35em;
+  text-shadow: var(--glow-soft);
+}
+.reflection-editor h1 {
+  font-size: 22px;
+}
+.reflection-editor h2 {
+  font-size: 17px;
+  opacity: 0.92;
+}
+.reflection-editor h1:first-child,
+.reflection-editor h2:first-child {
+  margin-top: 0;
+}
 
 /* Annotation marks — clickable inline highlights */
 mark.annotation-mark {
@@ -190,4 +416,59 @@ mark.annotation-mark:hover {
   content: "_";
   margin-left: 2px;
   animation: caret-blink 1s steps(1) infinite;
+}
+
+/* ─── Pierce & Pierce embossed mark (paul-allen style only) ──────────── */
+.paul-allen-mark {
+  display: none;
+}
+[data-style="paul-allen"] .paul-allen-mark {
+  display: block;
+  position: absolute;
+  top: 20px;
+  left: 24px;
+  z-index: 5;
+  pointer-events: none;
+  user-select: none;
+  text-align: left;
+  color: var(--fg);
+  font-family: "Copperplate", "Copperplate Gothic Bold",
+    "Copperplate Gothic Light", "Copperplate Gothic", "Cinzel",
+    "Marcellus SC", "Times New Roman", serif;
+  opacity: 0.88;
+}
+/* Push the prose down so the mark sits cleanly above it. The mark itself is
+ * absolutely positioned, so reserve vertical room with padding-top. */
+[data-style="paul-allen"] .prose-terminal {
+  padding-top: 60px !important;
+}
+@media (max-width: 640px) {
+  [data-style="paul-allen"] .prose-terminal {
+    padding-top: 52px !important;
+  }
+}
+.paul-allen-mark .pp-title {
+  font-size: 17px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  line-height: 1.05;
+}
+.paul-allen-mark .pp-subtitle {
+  font-size: 7.5px;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  line-height: 1.1;
+  margin-top: 3px;
+}
+@media (max-width: 640px) {
+  [data-style="paul-allen"] .paul-allen-mark {
+    top: 16px;
+    left: 18px;
+  }
+  .paul-allen-mark .pp-title {
+    font-size: 14px;
+  }
+  .paul-allen-mark .pp-subtitle {
+    font-size: 6.5px;
+  }
 }
