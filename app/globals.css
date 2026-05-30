@@ -446,6 +446,12 @@ mark.annotation-mark:hover {
    * itself to the same edges. */
   width: max-content;
 }
+
+/* ─── Paul Allen mark — dark-mode override (white ink on mahogany) */
+[data-style="paul-allen"][data-mode="dark"] .paul-allen-mark {
+  color: #fff;
+}
+
 /* Push the prose down so the mark sits cleanly above it. The mark itself is
  * absolutely positioned, so reserve vertical room with padding-top. */
 [data-style="paul-allen"] .prose-terminal {
@@ -487,7 +493,47 @@ mark.annotation-mark:hover {
 }
 
 /* ─── Hacker: drop the glow on heading + audio summaries toggle ───── */
-[data-style="hacker"] h1.glow-strong,
-[data-style="hacker"] .audio-summaries-toggle {
+/* Scoped to light mode — the dark-mode glow is hacker's signature look,
+ * but in light mode it becomes a flat drop shadow that reads as noise. */
+[data-style="hacker"][data-mode="light"] h1.glow-strong,
+[data-style="hacker"][data-mode="light"] .audio-summaries-toggle,
+[data-style="hacker"][data-mode="light"] .archive-entry-headline {
   text-shadow: none !important;
+}
+
+/* ─── Feeds dashboard grid ───────────────────────────────────────── */
+.feeds-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+  height: 100%;
+  align-content: start;
+}
+.feeds-grid > section,
+.feeds-grid > div > section {
+  /* Each column gets a sensible default height so the inner scroll-area
+   * activates. The outer page already provides the viewport. The second
+   * selector accounts for the framer-motion wrapper that sits between
+   * the grid and the section when chevron-paging is animating. */
+  height: min(72vh, 720px);
+}
+.feeds-grid > div {
+  /* motion wrapper inherits the column slot; let the section fill it. */
+  min-width: 0;
+}
+@media (min-width: 760px) {
+  .feeds-grid[data-count="2"] {
+    grid-template-columns: 1fr 1fr;
+  }
+  .feeds-grid[data-count="3"] {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+.links-add-btn:hover {
+  border-color: var(--fg);
+}
+
+/* ─── Feeds pager arrows ─────────────────────────────────────────── */
+.links-pager-btn:hover:not(:disabled) {
+  border-color: var(--fg);
 }

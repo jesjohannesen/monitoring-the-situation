@@ -8,9 +8,9 @@ import { useEffect, useState } from "react";
 type Item = { label: string; href: string };
 
 const ITEMS: Item[] = [
-  { label: "today's entry", href: "/" },
-  { label: "links", href: "/links" },
-  { label: "archive", href: "/archive" },
+  { label: "today's summary", href: "/" },
+  { label: "news feeds", href: "/links" },
+  { label: "previous summaries", href: "/archive" },
 ];
 
 export function NavMenu() {
@@ -109,27 +109,36 @@ export function NavMenu() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.22, ease: "easeOut" }}
+            transition={{ duration: 0.2, ease: "easeOut" }}
             onClick={() => setOpen(false)}
-            className="fixed inset-0 z-[64] flex items-center justify-center"
+            className="fixed inset-0 z-[64]"
             style={{
               background: "var(--overlay-tint)",
-              backdropFilter: "blur(20px)",
-              WebkitBackdropFilter: "blur(20px)",
+              backdropFilter: "blur(8px)",
+              WebkitBackdropFilter: "blur(8px)",
             }}
           >
             <motion.nav
               onClick={(e) => e.stopPropagation()}
-              initial={{ y: 8, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              exit={{ y: 4, opacity: 0 }}
-              transition={{ duration: 0.28, ease: "easeOut", delay: 0.04 }}
+              initial={{ x: "-100%" }}
+              animate={{ x: 0 }}
+              exit={{ x: "-100%" }}
+              transition={{ duration: 0.28, ease: [0.2, 0.7, 0.2, 1] }}
               style={{
+                position: "absolute",
+                top: 0,
+                bottom: 0,
+                left: 0,
+                width: "min(300px, 80vw)",
+                background: "var(--bg)",
+                borderRight: "1px solid var(--border-med)",
+                // Pad the top to clear the trigger glyph (top:12, ~36px tall).
+                padding: "76px 24px 28px",
                 display: "flex",
                 flexDirection: "column",
-                alignItems: "center",
-                gap: "14px",
+                gap: "8px",
                 fontFamily: "var(--font-display), monospace",
+                boxShadow: "8px 0 32px rgba(0,0,0,0.35)",
               }}
               aria-label="primary"
             >
@@ -142,13 +151,13 @@ export function NavMenu() {
                 return (
                   <motion.div
                     key={it.href}
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: 4 }}
+                    initial={{ opacity: 0, x: -8 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: -4 }}
                     transition={{
-                      duration: 0.24,
+                      duration: 0.22,
                       ease: "easeOut",
-                      delay: 0.05 + i * 0.06,
+                      delay: 0.08 + i * 0.05,
                     }}
                   >
                     <Link
@@ -162,7 +171,7 @@ export function NavMenu() {
                         display: "block",
                         color: "var(--fg)",
                         fontFamily: "var(--font-display), monospace",
-                        fontSize: "36px",
+                        fontSize: "22px",
                         letterSpacing: "0.02em",
                         textTransform: "lowercase",
                         textShadow: isActive
@@ -170,7 +179,7 @@ export function NavMenu() {
                           : "var(--glow-soft)",
                         opacity: isActive ? 1 : 0.7,
                         textDecoration: "none",
-                        padding: "4px 12px",
+                        padding: "6px 4px",
                         transition:
                           "opacity 120ms ease-out, text-shadow 120ms ease-out, transform 120ms ease-out",
                       }}
