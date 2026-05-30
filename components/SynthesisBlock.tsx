@@ -4,6 +4,7 @@ import { memo } from "react";
 import ReactMarkdown, { Components } from "react-markdown";
 import type { LinkPreview } from "@/lib/supabase";
 import { LinkWithPreview } from "./LinkWithPreview";
+import { PierceAndPierceMark } from "./PierceAndPierceMark";
 
 type Props = {
   markdown: string;
@@ -24,19 +25,22 @@ function SynthesisBlockImpl({ markdown, linkPreviews }: Props) {
   };
 
   return (
-    <div
-      className="prose-terminal glow-soft"
-      style={{
-        border: "1px solid var(--border-soft)",
-        padding: "24px",
-        backdropFilter: "blur(4px)",
-        WebkitBackdropFilter: "blur(4px)",
-        fontFamily: "var(--font-jetbrains), monospace",
-        fontSize: "15px",
-        lineHeight: 1.7,
-      }}
-    >
-      <ReactMarkdown components={components}>{markdown}</ReactMarkdown>
+    <div style={{ position: "relative" }}>
+      <PierceAndPierceMark />
+      <div
+        className="prose-terminal glow-soft"
+        style={{
+          border: "1px solid var(--border-soft)",
+          padding: "24px 24px 22px",
+          backdropFilter: "blur(4px)",
+          WebkitBackdropFilter: "blur(4px)",
+          fontFamily: "var(--font-body), monospace",
+          fontSize: "var(--prose-font-size)",
+          lineHeight: "var(--prose-line-height)",
+        }}
+      >
+        <ReactMarkdown components={components}>{markdown}</ReactMarkdown>
+      </div>
     </div>
   );
 }

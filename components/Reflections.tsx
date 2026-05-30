@@ -80,8 +80,8 @@ export function Reflections({ briefingDate, annotations }: Props) {
             background: "transparent",
             border: "none",
             color: "var(--fg)",
-            fontFamily: "var(--font-vt323), monospace",
-            fontSize: "20px",
+            fontFamily: "var(--font-display), monospace",
+            fontSize: "var(--toggle-size)",
             letterSpacing: "0.03em",
             opacity: 0.7,
             textTransform: "lowercase",
@@ -173,7 +173,7 @@ function ReflectionsWindow({
           height: "min(86vh, 820px)",
           display: "flex",
           flexDirection: "column",
-          fontFamily: "var(--font-jetbrains), monospace",
+          fontFamily: "var(--font-ui), monospace",
           color: "var(--fg)",
           boxShadow: "0 14px 50px rgba(0,0,0,0.6)",
         }}
@@ -186,7 +186,7 @@ function ReflectionsWindow({
             justifyContent: "space-between",
             padding: "10px 16px",
             borderBottom: "1px solid var(--border-soft)",
-            fontFamily: "var(--font-vt323), monospace",
+            fontFamily: "var(--font-display), monospace",
             fontSize: "18px",
             letterSpacing: "0.04em",
             opacity: 0.85,
@@ -205,7 +205,7 @@ function ReflectionsWindow({
               background: "transparent",
               border: "none",
               color: "var(--fg)",
-              fontFamily: "var(--font-vt323), monospace",
+              fontFamily: "var(--font-display), monospace",
               fontSize: "18px",
               cursor: "pointer",
               padding: "0 4px",
@@ -249,7 +249,7 @@ function ReflectionsWindow({
           >
             <div
               style={{
-                fontFamily: "var(--font-vt323), monospace",
+                fontFamily: "var(--font-display), monospace",
                 fontSize: "16px",
                 opacity: 0.65,
                 marginBottom: "10px",
@@ -260,7 +260,7 @@ function ReflectionsWindow({
             {annotations.length === 0 && (
               <div
                 style={{
-                  fontFamily: "var(--font-jetbrains), monospace",
+                  fontFamily: "var(--font-ui), monospace",
                   fontSize: "11px",
                   opacity: 0.5,
                 }}
@@ -281,7 +281,7 @@ function ReflectionsWindow({
                   style={{
                     border: "1px solid var(--border-soft)",
                     padding: "8px 10px",
-                    fontFamily: "var(--font-jetbrains), monospace",
+                    fontFamily: "var(--font-body), monospace",
                     fontSize: "11px",
                     lineHeight: 1.5,
                     overflowWrap: "anywhere",
@@ -349,6 +349,8 @@ type Cmd =
 const COMMANDS: Cmd[] = [
   { kind: "exec", cmd: "bold", label: "B", title: "bold (⌘B)", key: "b" },
   { kind: "exec", cmd: "italic", label: "I", title: "italic (⌘I)", key: "i" },
+  { kind: "block", tag: "h1", label: "H1", title: "heading 1" },
+  { kind: "block", tag: "h2", label: "H2", title: "heading 2" },
   {
     kind: "exec",
     cmd: "insertUnorderedList",
@@ -387,6 +389,22 @@ function RichTextEditor({
     editorRef.current?.focus();
     document.execCommand(cmd, false, undefined);
     // Defer onChange to let execCommand finish its DOM update.
+    requestAnimationFrame(() => {
+      if (editorRef.current) onChange(editorRef.current.innerHTML);
+    });
+  }
+
+  // Toggle the current block between the given tag and a plain <div>.
+  // execCommand("formatBlock") is supported in all modern browsers and
+  // accepts both bare ("h1") and bracketed ("<h1>") tag forms; the bracketed
+  // form is the broadest-compat path.
+  function execBlock(tag: string) {
+    editorRef.current?.focus();
+    const current = (
+      document.queryCommandValue("formatBlock") || ""
+    ).toLowerCase();
+    const next = current === tag ? "div" : tag;
+    document.execCommand("formatBlock", false, `<${next}>`);
     requestAnimationFrame(() => {
       if (editorRef.current) onChange(editorRef.current.innerHTML);
     });
@@ -500,7 +518,7 @@ function RichTextEditor({
     background: "transparent",
     border: "1px solid var(--border-soft)",
     color: "var(--fg)",
-    fontFamily: "var(--font-jetbrains), monospace",
+    fontFamily: "var(--font-ui), monospace",
     fontSize: "12px",
     letterSpacing: "0.06em",
     textTransform: "uppercase",
@@ -523,24 +541,22 @@ function RichTextEditor({
           flexShrink: 0,
         }}
       >
-        {COMMANDS.map((c) =>
-          c.kind === "exec" ? (
-            <button
-              key={c.label}
-              type="button"
-              title={c.title}
-              onMouseDown={(e) => {
-                // Prevent the editor from losing focus before execCommand runs.
-                e.preventDefault();
-              }}
-              onClick={() => exec(c.cmd)}
-              className="rt-btn"
-              style={toolbarBtnStyle}
-            >
-              {c.label}
-            </button>
-          ) : null,
-        )}
+        {COMMANDS.map((c) => (
+          <button
+            key={c.label}
+            type="button"
+            title={c.title}
+            onMouseDown={(e) => {
+              // Prevent the editor from losing focus before execCommand runs.
+              e.preventDefault();
+            }}
+            onClick={() => (c.kind === "exec" ? exec(c.cmd) : execBlock(c.tag))}
+            className="rt-btn"
+            style={toolbarBtnStyle}
+          >
+            {c.label}
+          </button>
+        ))}
       </div>
       <div
         ref={editorRef}
@@ -556,7 +572,7 @@ function RichTextEditor({
           minHeight: 0,
           overflowY: "auto",
           padding: "18px 22px",
-          fontFamily: "var(--font-jetbrains), monospace",
+          fontFamily: "var(--font-body), monospace",
           fontSize: "14px",
           lineHeight: 1.7,
           color: "var(--fg)",

@@ -82,7 +82,7 @@ export function NavMenu() {
           background: "var(--bg)",
           border: "1px solid var(--border-med)",
           color: "var(--fg)",
-          fontFamily: "var(--font-vt323), monospace",
+          fontFamily: "var(--font-display), monospace",
           fontSize: "26px",
           lineHeight: 1,
           padding: "4px 12px 6px",
@@ -129,7 +129,7 @@ export function NavMenu() {
                 flexDirection: "column",
                 alignItems: "center",
                 gap: "14px",
-                fontFamily: "var(--font-vt323), monospace",
+                fontFamily: "var(--font-display), monospace",
               }}
               aria-label="primary"
             >
@@ -161,7 +161,7 @@ export function NavMenu() {
                       style={{
                         display: "block",
                         color: "var(--fg)",
-                        fontFamily: "var(--font-vt323), monospace",
+                        fontFamily: "var(--font-display), monospace",
                         fontSize: "36px",
                         letterSpacing: "0.02em",
                         textTransform: "lowercase",

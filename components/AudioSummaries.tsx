@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { AudioButton } from "./AudioButton";
+import { toggleSymbol, useDataStyle } from "@/lib/useDataStyle";
 
 type Props = {
   briefingDate: string;
@@ -16,6 +17,7 @@ export function AudioSummaries({
   norwegianScript,
 }: Props) {
   const [open, setOpen] = useState(false);
+  const dataStyle = useDataStyle();
   return (
     <div style={{ marginBottom: "28px" }}>
       <button
@@ -27,8 +29,8 @@ export function AudioSummaries({
           background: "transparent",
           border: "none",
           color: "var(--fg)",
-          fontFamily: "var(--font-vt323), monospace",
-          fontSize: "20px",
+          fontFamily: "var(--font-display), monospace",
+          fontSize: "var(--toggle-size)",
           letterSpacing: "0.03em",
           opacity: 0.7,
           textTransform: "lowercase",
@@ -38,7 +40,7 @@ export function AudioSummaries({
           transition: "opacity 120ms ease-out",
         }}
       >
-        &gt; audio summaries [{open ? "−" : "+"}]
+        &gt; audio summaries {toggleSymbol(dataStyle, open)}
       </button>
       <AnimatePresence initial={false}>
         {open && (

@@ -56,7 +56,7 @@ export function BootScreen({ onComplete }: Props) {
         <div
           className="lowercase"
           style={{
-            fontFamily: "var(--font-jetbrains), monospace",
+            fontFamily: "var(--font-ui), monospace",
             fontSize: "13px",
             letterSpacing: "0.08em",
             opacity: 0.7,
@@ -79,7 +79,7 @@ export function BootScreen({ onComplete }: Props) {
             borderBottom: "1px solid var(--border-med)",
             outline: "none",
             color: "var(--fg)",
-            fontFamily: "var(--font-jetbrains), monospace",
+            fontFamily: "var(--font-ui), monospace",
             fontSize: "16px",
             padding: "6px 4px",
             textAlign: "center",
@@ -95,7 +95,7 @@ export function BootScreen({ onComplete }: Props) {
             background: "transparent",
             border: "1px solid var(--border-strong)",
             color: "var(--fg)",
-            fontFamily: "var(--font-jetbrains), monospace",
+            fontFamily: "var(--font-ui), monospace",
             fontSize: "13px",
             letterSpacing: "0.1em",
             textTransform: "uppercase",
@@ -113,7 +113,7 @@ export function BootScreen({ onComplete }: Props) {
             style={{
               fontSize: "12px",
               opacity: 0.6,
-              fontFamily: "var(--font-jetbrains), monospace",
+              fontFamily: "var(--font-ui), monospace",
             }}
           >
             {err}

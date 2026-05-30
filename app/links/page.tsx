@@ -5,10 +5,10 @@ export default function LinksPage() {
         <h1
           className="glow-strong"
           style={{
-            fontFamily: "var(--font-vt323), monospace",
-            fontSize: "44px",
-            lineHeight: 1.1,
-            letterSpacing: "0.01em",
+            fontFamily: "var(--font-display), monospace",
+            fontSize: "var(--heading-size)",
+            lineHeight: "var(--heading-line-height)",
+            letterSpacing: "var(--display-letter-spacing)",
             marginBottom: "16px",
           }}
         >
@@ -16,7 +16,7 @@ export default function LinksPage() {
         </h1>
         <div
           style={{
-            fontFamily: "var(--font-jetbrains), monospace",
+            fontFamily: "var(--font-ui), monospace",
             fontSize: "14px",
             opacity: 0.6,
           }}

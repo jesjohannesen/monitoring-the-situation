@@ -38,10 +38,10 @@ export function BriefingHeading({ themesHeading, briefingDate }: Props) {
       <h1
         className="glow-strong"
         style={{
-          fontFamily: "var(--font-vt323), monospace",
-          fontSize: "44px",
-          lineHeight: 1.1,
-          letterSpacing: "0.01em",
+          fontFamily: "var(--font-display), monospace",
+          fontSize: "var(--heading-size)",
+          lineHeight: "var(--heading-line-height)",
+          letterSpacing: "var(--display-letter-spacing)",
         }}
       >
         {themesHeading}
@@ -50,8 +50,8 @@ export function BriefingHeading({ themesHeading, briefingDate }: Props) {
         id="briefing-date-line"
         className="mt-3 lowercase"
         style={{
-          fontFamily: "var(--font-vt323), monospace",
-          fontSize: "18px",
+          fontFamily: "var(--font-display), monospace",
+          fontSize: "var(--date-size)",
           letterSpacing: "0.04em",
           opacity: 0.6,
           textShadow: "var(--glow-soft)",
