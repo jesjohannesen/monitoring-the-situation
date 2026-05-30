@@ -91,7 +91,7 @@ function playPaulAllenSting() {
     const b = new Audio("/audio/paul-allen.mp3");
     a.preload = "auto";
     b.preload = "auto";
-    const PEAK = 0.6;
+    const PEAK = 0.95; // peak playback volume (HTMLAudioElement caps at 1.0)
     const CROSSFADE_MS = 700; // both ramps run in parallel over this window
     const END_FADE_OUT_MS = 600; // outro fade at the end of the second clip
     const TICK = 30;

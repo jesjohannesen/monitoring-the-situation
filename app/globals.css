@@ -26,7 +26,7 @@
   --prose-line-height: 1.7;
   --heading-size: 44px;
   --heading-line-height: 1.1;
-  --date-size: 18px;
+  --date-size: 20px;
   --toggle-size: 20px;
 }
 
@@ -41,10 +41,10 @@
   --prose-line-height: 1.65;
   /* Inter at 44 reads heavier than VT323 at 44 because pixel fonts feel
    * lighter per em; trim a few px and tighten leading. */
-  --heading-size: 38px;
+  --heading-size: 34px;
   --heading-line-height: 1.08;
   --date-size: 15px;
-  --toggle-size: 17px;
+  --toggle-size: 15px;
 }
 
 /* ─── Mode: dark (default) — black bg, white fg, soft white glow ──────── */
@@ -112,7 +112,7 @@
   --heading-size: 30px;
   --heading-line-height: 1.18;
   --date-size: 13px;
-  --toggle-size: 13px;
+  --toggle-size: 16px;
   /* Paul Allen's card — true subtle off-white, neutral and barely warm.
    * Sampled to mimic the actual business-card stock: nearly desaturated,
    * a touch of cream so it doesn't read as cold paper. */
@@ -435,7 +435,16 @@ mark.annotation-mark:hover {
   font-family: "Copperplate", "Copperplate Gothic Bold",
     "Copperplate Gothic Light", "Copperplate Gothic", "Cinzel",
     "Marcellus SC", "Times New Roman", serif;
-  opacity: 0.88;
+  color: #000;
+  opacity: 0.9;
+  /* No inherited shadow + explicit smoothing so small-size letterforms
+   * render cleanly across mac browsers (no top-edge fade artefact). */
+  text-shadow: none;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* Shrink container to the title's width so the subtitle can justify
+   * itself to the same edges. */
+  width: max-content;
 }
 /* Push the prose down so the mark sits cleanly above it. The mark itself is
  * absolutely positioned, so reserve vertical room with padding-top. */
@@ -448,17 +457,21 @@ mark.annotation-mark:hover {
   }
 }
 .paul-allen-mark .pp-title {
-  font-size: 17px;
+  font-size: 16px;
   font-weight: 700;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.03em;
   line-height: 1.05;
 }
 .paul-allen-mark .pp-subtitle {
-  font-size: 7.5px;
-  font-weight: 500;
-  letter-spacing: 0.22em;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
   line-height: 1.1;
   margin-top: 3px;
+  /* Stretch to the title's width. text-align-last is what justifies the
+   * (only) line — text-align: justify alone has no effect on a single line. */
+  text-align: justify;
+  text-align-last: justify;
 }
 @media (max-width: 640px) {
   [data-style="paul-allen"] .paul-allen-mark {
@@ -469,6 +482,12 @@ mark.annotation-mark:hover {
     font-size: 14px;
   }
   .paul-allen-mark .pp-subtitle {
-    font-size: 6.5px;
+    font-size: 7.5px;
   }
+}
+
+/* ─── Hacker: drop the glow on heading + audio summaries toggle ───── */
+[data-style="hacker"] h1.glow-strong,
+[data-style="hacker"] .audio-summaries-toggle {
+  text-shadow: none !important;
 }
