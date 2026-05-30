@@ -18,6 +18,10 @@ type SDKPlayer = {
     duration: number;
     track_window?: { current_track?: { uri?: string } };
   } | null>;
+  // Safari autoplay-policy workaround — must be called inside a user gesture
+  // frame. No-op in browsers without strict autoplay (Chrome/Firefox/Edge).
+  // Marked optional because older SDK versions don't expose it.
+  activateElement?: () => Promise<void>;
 };
 
 declare global {
@@ -188,6 +192,17 @@ async function rebuildPlayer(): Promise<string | null> {
 }
 
 async function play(uri: string): Promise<void> {
+  // Safari autoplay fix: activateElement() must be called inside the same
+  // user-gesture frame as the click that triggered play. Calling it before
+  // any `await` keeps us inside that frame. No-op in browsers without
+  // strict autoplay policy. Don't await — let the SDK handle it in parallel
+  // with the rest of our setup so we don't break the gesture chain.
+  try {
+    modulePlayer?.activateElement?.();
+  } catch {
+    /* ignore — older SDK or unsupported browser */
+  }
+
   // If this same track is already loaded, just resume from where we paused
   // — don't restart it from position 0.
   if (moduleCurrentUri === uri && modulePlayer) {
