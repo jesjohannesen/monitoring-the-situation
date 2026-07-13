@@ -1,0 +1,86 @@
+{
+  "briefing_date": "2026-07-13",
+  "themes_heading": "Hormuz closed · GPT-5.6 goes public · NATO Ankara delivers · SK Hynix breaks US IPO record",
+  "synthesis_md": "The week's most urgent story is the US-Iran military confrontation in the Gulf. The IRGC attacked a Cyprus-flagged container ship in the Strait of Hormuz and [declared the waterway closed](https://www.npr.org/2026/07/11/g-s1-133212/us-iran-vessel-attack-strait-hormuz-gulf), and US CENTCOM launched its [third round of strikes in seven days](https://www.cnn.com/2026/07/11/world/live-news/iran-war-trump), hitting more than three hundred Iranian military targets. Tehran retaliated against an air base in Jordan; Bahrain and the UAE activated air-raid sirens. Oman is mediating with a two-route traffic proposal, but diplomacy is far behind the bombs. About twenty percent of global oil flows through the Strait — crude futures are moving on supply disruption risk, and this feeds directly into freight, LNG pricing, and server electricity costs.\n\nThe AI industry launched on schedule regardless. [OpenAI released GPT-5.6](https://openai.com/index/previewing-gpt-5-6-sol/) on July ninth after US Commerce clearance: Sol at $5/$30 per million tokens, Terra at $2.50/$15, and Luna at $1/$6, all running on Cerebras at up to 750 tokens per second. The three-tier structure is a direct answer to competitors across capability and price. [Anthropic entered drug discovery with Claude Science](https://www.cnbc.com/2026/06/30/anthropic-launches-ai-drug-discovery-program-claude-science.html) — a research workbench integrating 60+ scientific databases, with Novo Nordisk and the Allen Institute as early customers. Applications for $30k in API credits are open until July fifteenth.\n\nThe [NATO Ankara summit](https://www.atlanticcouncil.org/dispatches/eleven-takeaways-from-the-nato-summit-in-ankara/) concluded with €70 billion pledged for Ukraine in 2026, Germany committing to manufacture Ukraine's long-range BARSA strike drones, and $50 billion in new alliance procurement. Ukraine left without a membership path but with more concrete defense production commitments than any prior summit. The structural tension between Article 5 and US political reliability was reaffirmed in text and left unresolved in practice.\n\nOn markets, [SK Hynix debuted $26.5 billion in ADRs on Nasdaq](https://www.bloomberg.com/news/articles/2026-07-09/sk-hynix-is-said-to-price-us-share-offering-at-149-apiece-mrdz562z) — the largest-ever US IPO by a foreign company — closing its first day up 13% on demand that ran seven times oversubscribed. The South Korean HBM champion, with 56% global market share, now trades on Nasdaq as SKHY.\n\n## what this means for you\n\nThe Hormuz situation is the most direct macro risk this week: Norwegian LNG export prices and Equinor's book move with Gulf disruptions. On AI: Luna at $1/$6 per million tokens now undercuts most hosted open-weight alternatives — worth re-benchmarking your Mistral stack. The Anthropic Claude Science grants close July 15 and offer $30k in credits for ML-for-science projects. SK Hynix as a listed stock is a clean proxy for AI infrastructure sentiment — it tracks HBM demand, which tracks AI compute buildout directly.",
+  "english_script": "Good morning. Here are the four stories that matter most today, July thirteenth.\n\nFirst, the US-Iran confrontation in the Gulf. After Iran's Revolutionary Guard attacked a Cyprus-flagged container ship in the Strait of Hormuz and declared the waterway closed, US Central Command launched its third round of military strikes in seven days, hitting more than three hundred Iranian military targets. Iran retaliated with missiles against an air base in Jordan, and air-raid sirens went off in Bahrain and the United Arab Emirates. Oman is trying to mediate with a two-route traffic proposal, but diplomacy is nowhere near catching up. About twenty percent of the world's oil flows through the Strait of Hormuz, and crude prices are climbing on supply disruption fears.\n\nSecond, OpenAI launched GPT-five-point-six publicly on July ninth after the US Commerce Department completed its review. Three tiers: Sol, the flagship, at five dollars per million input tokens; Terra, a balanced mid-tier at two dollars fifty; and Luna, a budget option at one dollar per million. All running on Cerebras infrastructure at up to seven hundred and fifty tokens per second. Anthropic launched Claude Science in parallel — an AI research workbench connecting more than sixty scientific databases — with Novo Nordisk and the Allen Institute as early customers.\n\nThird, NATO's Ankara summit wrapped up with allies pledging seventy billion euros in military support for Ukraine in twenty twenty-six. Germany committed to manufacturing Ukraine's long-range BARSA strike drones on its own soil. Alliance procurement contracts exceed fifty billion dollars. Ukraine left without a membership timeline but with meaningful hardware commitments.\n\nFourth, SK Hynix completed the largest US IPO ever by a foreign company, raising twenty-six-point-five billion dollars through its Nasdaq listing and closing up thirteen percent on its first trading day. The South Korean memory chipmaker controls fifty-six percent of the high-bandwidth memory market that powers AI data centers worldwide.\n\nLooking ahead: June CPI data and Federal Reserve chairman Kevin Warsh's congressional testimony are both due Tuesday, alongside second-quarter earnings from JPMorgan, Goldman Sachs, Bank of America, Wells Fargo, and Citigroup. Markets enter the week near all-time highs, with energy prices moving on the Hormuz situation and chip stocks in demand.",
+  "norwegian_script": "God morgen. Her er de fire sakene som betyr mest i dag, den trettende juli.\n\nFørst: USA og Iran i Persiabukta. Etter at Irans revolusjonsgarde angrep et kypriotisk containerskip i Hormuzstredet og erklærte farvannet stengt, svarte det amerikanske forsvarets sentralkommando med sin tredje runde militære angrep på syv dager og rammet mer enn tre hundre iranske militære mål. Iran svarte med missiler mot en flybase i Jordan, og luftvarslene gikk i Bahrain og De forente arabiske emirater. Oman forsøker å megle med et forslag om to separate sjøruter, men diplomatiet henger langt etter de militære operasjonene. Om lag tjue prosent av verdens olje passerer gjennom Hormuzstredet, og råoljeprisen stiger på grunn av frykten for forsyningsavbrudd.\n\nFor det andre: OpenAI lanserte GPT-fem-komma-seks offentlig den niende juli etter at det amerikanske handelsdepartementet hadde fullført sin gjennomgang. Tre nivåer: Sol, flaggskipet, til fem dollar per million input-tokens; Terra, et balansert mellomnivå til to dollar og femti cent; og Luna, et budsjettalternativ til én dollar per million. Alle modellene kjører på Cerebras-infrastruktur med opp til syv hundre og femti tokens per sekund. Anthropic lanserte Claude Science parallelt — en AI-forskningsplattform med tilgang til mer enn seksti vitenskapelige databaser — med Novo Nordisk og Allen Institute som de første kundene.\n\nFor det tredje: NATOs toppmøte i Ankara ble avsluttet med løfter om sytti milliarder euro i militær støtte til Ukraina i to tusen og tjueseks. Tyskland forpliktet seg til å produsere Ukrainas langtrekkende BARSA-droner på egen jord. Anskaffelseskontrakter innen alliansen overstiger femti milliarder dollar. Ukraina forlater toppmøtet uten en klar vei til NATO-medlemskap, men med konkrete materiellforpliktelser.\n\nFor det fjerde: SK Hynix gjennomførte den største børsnoteringen noensinne av et utenlandsk selskap i USA og hentet inn tjueseks komma fem milliarder dollar gjennom sin Nasdaq-notering. Selskapet endte opp tretten prosent på første handelsdag. Den sørkoreanske minnebrikkeprodusenten kontrollerer femtiseks prosent av markedet for høybåndbredde-minne som driver kunstig intelligens-datasentre verden over.\n\nFremover: Juni-KPI og vitneforklaring fra sentralbanksjef Kevin Warsh i Kongressen er ventet tirsdag, sammen med kvartalstall fra JPMorgan, Goldman Sachs, Bank of America, Wells Fargo og Citigroup. Markedene åpner uken nær rekordnivåer, med energipriser i bevegelse på grunn av Hormuz-situasjonen og sterk etterspørsel etter brikkepapirer.",
+  "sources": [
+    {
+      "title": "US strikes Iran after ship attack in Strait of Hormuz",
+      "url": "https://www.cnn.com/2026/07/11/world/live-news/iran-war-trump"
+    },
+    {
+      "title": "US launches fresh strikes on Iran as Tehran says it has closed Strait of Hormuz",
+      "url": "https://www.npr.org/2026/07/11/g-s1-133212/us-iran-vessel-attack-strait-hormuz-gulf"
+    },
+    {
+      "title": "US launches third round of strikes after Iran announces strait closure",
+      "url": "https://thehill.com/policy/defense/5964263-iran-closes-strait-hormuz/"
+    },
+    {
+      "title": "Previewing GPT-5.6 Sol: a next-generation model",
+      "url": "https://openai.com/index/previewing-gpt-5-6-sol/"
+    },
+    {
+      "title": "The new GPT-5.6 family: Luna, Terra, Sol",
+      "url": "https://simonwillison.net/2026/Jul/9/gpt-5-6/"
+    },
+    {
+      "title": "Anthropic launches AI drug discovery program, Claude Science",
+      "url": "https://www.cnbc.com/2026/06/30/anthropic-launches-ai-drug-discovery-program-claude-science.html"
+    },
+    {
+      "title": "Eleven takeaways from the NATO Summit in Ankara",
+      "url": "https://www.atlanticcouncil.org/dispatches/eleven-takeaways-from-the-nato-summit-in-ankara/"
+    },
+    {
+      "title": "The Ankara Summit Declaration",
+      "url": "https://www.nato.int/en/about-us/official-texts-and-resources/official-texts/2026/07/08/the-ankara-summit-declaration"
+    },
+    {
+      "title": "SK Hynix Raises $26.5 Billion in Biggest Foreign Debut in US",
+      "url": "https://www.bloomberg.com/news/articles/2026-07-09/sk-hynix-is-said-to-price-us-share-offering-at-149-apiece-mrdz562z"
+    },
+    {
+      "title": "Stock market next week: Outlook for July 13-17, 2026",
+      "url": "https://www.cnbc.com/2026/07/10/stock-market-next-week-outlook-for-july-13-17-2026.html"
+    }
+  ],
+  "link_previews": {
+    "https://www.cnn.com/2026/07/11/world/live-news/iran-war-trump": {
+      "title": "US strikes Iran after ship attack in Strait of Hormuz",
+      "excerpt": "The US military launched fresh strikes against Iran following an IRGC attack on a Cyprus-flagged container ship transiting the Strait of Hormuz. US CENTCOM has struck more than 300 Iranian military targets over the past week to degrade Iran's ability to attack commercial vessels. Iran declared the strait closed and retaliated with missiles against air bases in Jordan.",
+      "host": "cnn.com"
+    },
+    "https://www.npr.org/2026/07/11/g-s1-133212/us-iran-vessel-attack-strait-hormuz-gulf": {
+      "title": "US launches fresh strikes on Iran as Tehran says it has closed Strait of Hormuz",
+      "excerpt": "Iran's Islamic Revolutionary Guard Corps declared the Strait of Hormuz closed after attacking a Cyprus-flagged container ship, saying it fired a warning shot at a vessel attempting an unauthorized route. The closure threatens roughly twenty percent of global oil supply. Oman drafted a tentative proposal to manage traffic through two separately controlled routes.",
+      "host": "npr.org"
+    },
+    "https://openai.com/index/previewing-gpt-5-6-sol/": {
+      "title": "Previewing GPT-5.6 Sol: a next-generation model",
+      "excerpt": "OpenAI's GPT-5.6 family — Sol, Terra, and Luna — launched publicly on July 9 after US Commerce Department review. Sol is priced at $5 input / $30 output per million tokens and runs on Cerebras infrastructure at up to 750 tokens per second. Terra offers GPT-5.5-level performance at 2x lower cost; Luna brings strong capability at the lowest price point.",
+      "host": "openai.com"
+    },
+    "https://www.cnbc.com/2026/06/30/anthropic-launches-ai-drug-discovery-program-claude-science.html": {
+      "title": "Anthropic launches AI drug discovery program, Claude Science",
+      "excerpt": "Anthropic unveiled Claude Science, a research workbench integrating over 60 scientific databases spanning genomics, proteomics, and cheminformatics into a unified platform. The company also began an internal drug discovery program targeting neglected diseases. Early customers include Novo Nordisk and the Allen Institute. Applications for up to $30,000 in API credits are open until July 15.",
+      "host": "cnbc.com"
+    },
+    "https://www.atlanticcouncil.org/dispatches/eleven-takeaways-from-the-nato-summit-in-ankara/": {
+      "title": "Eleven takeaways from the NATO Summit in Ankara",
+      "excerpt": "NATO allies pledged €70 billion for Ukraine in 2026 and signed $50 billion in new procurement contracts at the Ankara summit. Germany committed to manufacturing Ukraine's long-range BARSA strike drones, and Estonia and the Netherlands signed new drone cooperation agreements with Kyiv. Ukraine left without a membership timeline despite 18 years of pursuit, though the summit marked a significant shift toward joint defense production.",
+      "host": "atlanticcouncil.org"
+    },
+    "https://www.bloomberg.com/news/articles/2026-07-09/sk-hynix-is-said-to-price-us-share-offering-at-149-apiece-mrdz562z": {
+      "title": "SK Hynix Raises $26.5 Billion in Biggest Foreign Debut in US",
+      "excerpt": "SK Hynix raised $26.5 billion through its ADR offering priced at $149 each on Nasdaq, the largest-ever US IPO by a foreign company. Demand ran seven times oversubscribed. The South Korean memory chipmaker holds 56.4% of the global HBM market and closed its first trading day at $168.01, up 13% from the offering price.",
+      "host": "bloomberg.com"
+    }
+  },
+  "song_suggestion": {
+    "title": "Sinnerman",
+    "artist": "Nina Simone",
+    "why": "Simone's relentless, escalating 'Sinnerman' captures a week where forces once set in motion — Hormuz strikes, an AI model arms race, NATO's defense buildup — seem equally impossible to recall or redirect. The urgency is total; the outcome uncertain."
+  }
+}
