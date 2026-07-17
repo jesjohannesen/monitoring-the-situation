@@ -7,6 +7,10 @@ on:
         description: 'Path to briefing JSON file (relative to repo root)'
         required: true
         default: 'briefings/2026-07-17.json'
+      secret_override:
+        description: 'Override ingest secret (leave blank to use BRIEFING_INGEST_SECRET)'
+        required: false
+        default: ''
 
 jobs:
   ingest:
@@ -17,11 +21,15 @@ jobs:
       - name: POST briefing to ingest endpoint
         env:
           BRIEFING_SECRET: ${{ secrets.BRIEFING_INGEST_SECRET }}
+          SECRET_OVERRIDE: ${{ github.event.inputs.secret_override }}
         run: |
+          # Use override if provided, otherwise use the repo secret
+          EFFECTIVE_SECRET="${SECRET_OVERRIDE:-${BRIEFING_SECRET}}"
+
           RESPONSE=$(curl -sS -w '\n%{http_code}' -X POST \
             https://monitoring-the-situation-one.vercel.app/api/briefing/ingest \
             -H 'content-type: application/json' \
-            -H "x-briefing-secret: ${BRIEFING_SECRET}" \
+            -H "x-briefing-secret: ${EFFECTIVE_SECRET}" \
             -d @"${{ github.event.inputs.briefing_file }}")
 
           HTTP_CODE=$(echo "$RESPONSE" | tail -1)
